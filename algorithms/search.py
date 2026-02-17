@@ -142,6 +142,7 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
     """
     Search the node that has the lowest combined cost and heuristic first.
     
+<<<<<<< HEAD
     A* usa: f(n) = g(n) + h(n)
     donde g(n) es el costo real y h(n) es la estimación heurística.
     """
@@ -180,6 +181,45 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic):
                 h_cost = heuristic(successor, problem)
                 f_cost = new_g_cost + h_cost
                 frontier.push((successor, new_actions, new_g_cost), f_cost)
+=======
+    This implements A* search using:
+    f(n) = g(n) + h(n)
+    where:
+    - g(n) is the actual cost from start to node n
+    - h(n) is the heuristic estimate from n to goal
+    """
+    
+   
+    startState = problem.getStartState()
+    startHeuristic = heuristic(startState, problem)
+    startCost = 0
+    
+    frontier = utils.PriorityQueue()
+    frontier.push((startState, []), startCost + startHeuristic)
+    
+    visited = set()
+    bestCost = {startState: startCost}
+    
+    while not frontier.isEmpty():
+        state, actions = frontier.pop()
+        
+        if state in visited:
+            continue
+        visited.add(state)
+        
+        if problem.isGoalState(state):
+            return actions
+        
+        for successor, action, stepCost in problem.getSuccessors(state):
+            newCost = bestCost[state] + stepCost
+            
+            if successor not in bestCost or newCost < bestCost[successor]:
+                bestCost[successor] = newCost
+                heuristicValue = heuristic(successor, problem)
+                fValue = newCost + heuristicValue
+                newActions = actions + [action]
+                frontier.push((successor, newActions), fValue)
+>>>>>>> ab55e6fcf4b46df78cc7d8011db8e5416f4a8523
     
     return []
 

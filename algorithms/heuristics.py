@@ -14,17 +14,21 @@ def nullHeuristic(state, problem=None):
 def manhattanHeuristic(state, problem):
     """
     The Manhattan distance heuristic.
+    Calculates the sum of absolute differences in coordinates.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+    xy1 = state
+    xy2 = problem.goal
+    return abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
 
 
 def euclideanHeuristic(state, problem):
     """
     The Euclidean distance heuristic.
+    Calculates the straight-line distance between two points.
     """
-    # TODO: Add your code here
-    utils.raiseNotDefined()
+    xy1 = state
+    xy2 = problem.goal
+    return ((xy1[0] - xy2[0]) ** 2 + (xy1[1] - xy2[1]) ** 2) ** 0.5
 
 
 def survivorHeuristic(state: Tuple[Tuple, Any], problem: MultiSurvivorProblem):
